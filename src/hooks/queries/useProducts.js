@@ -7,6 +7,10 @@ export const useProducts = () => {
     allProducts {
       _id
       name
+      category
+      price
+      discountedPrice
+      model
       images {
         smallImg
       }

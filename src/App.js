@@ -10,21 +10,9 @@ import { Cart } from './pages/Cart/Cart'
 import AppContext from './context/AppContext'
 import { useInitialState } from './hooks/useInitialState'
 import { Contact } from './pages/Contact/Contact'
-import { useProducts } from './hooks/queries/useProducts'
-import { useFindProduct } from './hooks/queries/useFindProduct'
 
 function App() {
  
-  /*const { data, error, loading } = useProducts()
-  const result = useFindProduct("1")
-  console.log(data)
-  if(result.data){
-    console.log("funciona")
-    console.log(result.data.findProduct.images[0].smallImg)
-  }
-  
-  { result.data && <div>Hola!!<img src="C:\Users\cebra\Desktop\marateca070622\src\assets\productsImages\streaming\firelite.png"></img></div> }*/
-
   const initialState = useInitialState()
  
   const location = useLocation()

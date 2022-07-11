@@ -6,20 +6,29 @@ export const useFindProduct = (_id) => {
     query($_id: String!)  {
       findProduct(_id: $_id) {
         _id
-    name
-    category
-    price
-    discountedPrice
-    images {
-      smallImg
-      largeImg
+        name
+        category
+        price
+        discountedPrice
+        model
+        features
+        models {
+          type
+          variants {
+            _id
+            model
+          }
+        }
+        images {
+          smallImg
+          largeImg
     }
       }
     }
     `
 
-  const result = useQuery(FIND_PRODUCT, { variables: { _id: _id } })
+  const { data, loading } = useQuery(FIND_PRODUCT, { variables: { _id: _id } })
 
-  return result
+  return { data, loading }
 
 }

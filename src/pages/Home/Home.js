@@ -1,5 +1,5 @@
 import React from 'react'
-import pruebabanner from "../../assets/banners/prueba.png"
+import pruebabanner from "../../assets/banners/prueba.jpg"
 import sampleBanner from "../../assets/banners/sampleBanner.jpg"
 import { ProductList } from '../../components/ProductList/ProductList'
 import { Product } from '../../components/Product/Product'

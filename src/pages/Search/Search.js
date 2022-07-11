@@ -10,7 +10,6 @@ import sampleBanner from "../../assets/banners/sampleBanner.jpg"
 import { ProductList } from '../../components/ProductList/ProductList'
 import { Product } from '../../components/Product/Product'
 import { CategoriesBox } from '../../components/CategoriesBox/CategoriesBox'
-import { IgBox } from '../../components/IgBox/IgBox'
 
 export const Search = () => {
     const { id } = useParams()
@@ -105,9 +104,6 @@ export const Search = () => {
 
             <CategoriesBox 
             listTitle="Categorías"/>
-
-            <IgBox
-            listTitle="¡Síguenos en Instagram!"/>
 
             <img src={sampleBanner} loading="lazy"></img>
         </div>

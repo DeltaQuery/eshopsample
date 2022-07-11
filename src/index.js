@@ -8,7 +8,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache, HttpLink, gql } from '@apo
 const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
-        uri: "http://localhost:4000"
+        uri: "https://maratecabackend.herokuapp.com/"
     })
 })
 

@@ -190,7 +190,7 @@
 }
 
 .fixedGoToContactInfo p {
-    margin-top: 8px;
+    margin-top: 10px;
     text-align: center;
 }
 
@@ -228,6 +228,10 @@
 
     .desktopGoToContactInfo {
         display: block;
+    }
+
+    .desktopGoToContactInfo p {
+        margin-top: 10px;
     }
 
     .fixedGoToContactInfo {

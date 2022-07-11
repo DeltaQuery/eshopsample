@@ -8,8 +8,10 @@ import { productArr } from '../../database/productArr'
 import { AddToCartButton } from '../AddToCartButton/AddToCartButton'
 import AppContext from "../../context/AppContext"
 import roundNumber from "../../hooks/roundNumber"
+import { useProducts } from "../../hooks/queries/useProducts"
 
 export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, category, product }) => {
+    const { data, error, loading } = useProducts()
     const [products, setProducts] = React.useState()
     const { updateQuantity, removeFromCart } = React.useContext(AppContext)
 
@@ -22,20 +24,23 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
     }
 
     React.useEffect(() => {
-        if (product) {
-            setProducts(product)
-        } else {
-            if (!category) {
-                setProducts(productArr)
-            } else {
-                if (category === 50) {
-                    setProducts(productArr.filter(x => x.discountedPrice))
+        if (!loading) {
+            if (product) {
+                setProducts(product)
+            } else if(data) {
+                if (!category) {
+                    setProducts(data.allProducts)
                 } else {
-                    setProducts(productArr.filter(x => x.category.some(e => e === category)))
+                    if (category === 50) {
+                    setProducts(data.allProducts.filter(x => x.discountedPrice))
+                    } else {
+                      setProducts(data.allProducts.filter(x => x.category.some(e => e === category)))
+                    }
                 }
             }
         }
-    }, [])
+
+    }, [loading])
 
     const settings = {
         dots: false,
@@ -71,7 +76,7 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
                         key={product._id}>
 
                         <div className="productImgContainer">
-                            <Link to={`/details/${product._id}`} className="productImgLink"><img className="productImg" src={product.images[0]} loading="lazy"></img></Link>
+                            <Link to={`/details/${product._id}`} className="productImgLink"><img className="productImg" src={product.images[0].smallImg} loading="lazy"></img></Link>
                             <AddToCartButton
                                 buttonText=" + Carrito"
                                 buttonType="mobile"
@@ -105,7 +110,7 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
                 key={cartProduct._id}>
 
                 <div className="productImgContainer cartImgContainer">
-                    <Link to={`/details/${cartProduct._id}`} className="productImgLink cartProductImgLink"><img className="productImg cartImg" src={cartProduct.images[0]} loading="lazy"></img></Link>
+                    <Link to={`/details/${cartProduct._id}`} className="productImgLink cartProductImgLink"><img className="productImg cartImg" src={cartProduct.images[0].smallImg} loading="lazy"></img></Link>
                 </div>
 
                 <div className="cartProductInfo">
