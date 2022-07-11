@@ -3,15 +3,16 @@ import { BiShareAlt } from "react-icons/bi"
 import { MdNavigateBefore } from "react-icons/md"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import "./Search.css"
-import { productArr } from '../../database/productArr'
 import { categoriesArr } from '../../database/categoriesArr'
 import { AddToCartButton } from '../../components/AddToCartButton/AddToCartButton'
 import sampleBanner from "../../assets/banners/sampleBanner.jpg"
 import { ProductList } from '../../components/ProductList/ProductList'
 import { Product } from '../../components/Product/Product'
 import { CategoriesBox } from '../../components/CategoriesBox/CategoriesBox'
+import { useProducts } from "../../hooks/queries/useProducts"
 
 export const Search = () => {
+    const { data, error, loading } = useProducts()
     const { id } = useParams()
     const params = id.split("=")
     const navigate = useNavigate()
@@ -19,25 +20,27 @@ export const Search = () => {
     const [typeOfSearch, setTypeOfSearch] = React.useState([])
 
     React.useEffect(() => {
-        if (params[0] === "category") {
-            const category = categoriesArr.filter(x => x.categoryId === Number(params[1]))
-            if (category.length === 0) {
-                setTypeOfSearch([params[0], null, false])
-                setSearchedProducts([])
-            } else {
-                if (params[1] == 50) {
-                    setTypeOfSearch([params[0], category[0].category, true])
-                    setSearchedProducts(productArr.filter(x => x.discountedPrice))
+        if (!loading && data) {
+            if (params[0] === "category") {
+                const category = categoriesArr.filter(x => x.categoryId === Number(params[1]))
+                if (category.length === 0) {
+                    setTypeOfSearch([params[0], null, false])
+                    setSearchedProducts([])
                 } else {
-                    setTypeOfSearch([params[0], category[0].category, true])
-                    setSearchedProducts(productArr.filter(x => x.category.some(g => params[1] == g)))
+                    if (params[1] == 50) {
+                        setTypeOfSearch([params[0], category[0].category, true])
+                        setSearchedProducts(data.allProducts.filter(x => x.discountedPrice))
+                    } else {
+                        setTypeOfSearch([params[0], category[0].category, true])
+                        setSearchedProducts(data.allProducts.filter(x => x.category.some(g => params[1] == g)))
+                    }
                 }
+            } else if (params[0] === "value") {
+                setTypeOfSearch([params[0], params[1], true])
+                setSearchedProducts(data.allProducts.filter(x => x.name.toLowerCase().includes(params[1].toLowerCase()) || x.features.some((item) => item.toLowerCase().includes(params[1].toLowerCase()))))
             }
-        } else if (params[0] === "value") {
-            setTypeOfSearch([params[0], params[1], true])
-            setSearchedProducts(productArr.filter(x => x.name.toLowerCase().includes(params[1].toLowerCase()) || x.features.some((item) => item.toLowerCase().includes(params[1].toLowerCase()))))
         }
-    }, [id])
+    }, [id, loading])
 
     return (
         <div className="mainContent mainDetailContent">
@@ -65,7 +68,7 @@ export const Search = () => {
                         key={product._id}>
 
                         <div className="productImgContainer">
-                            <Link to={`/details/${product._id}`} className="productImgLink"><img className="productImg" src={product.images[0]} loading="lazy"></img></Link>
+                            <Link to={`/details/${product._id}`} className="productImgLink"><img className="productImg" src={product.images[0].smallImg} loading="lazy"></img></Link>
                             <AddToCartButton
                                 buttonText=" + Carrito"
                                 buttonType="mobile"
@@ -94,16 +97,16 @@ export const Search = () => {
             <img src={sampleBanner} loading="lazy"></img>
 
             <ProductList
-            listTitle={params[1] == 50 ? "¡Más vendidos! 🤯" : "¡Ofertas! ⏰"}
-            category={params[1] == 50 ? 53 : 50}
-          >
-            <Product
-              slides={4}
-            />
-          </ProductList>
+                listTitle={params[1] == 50 ? "¡Más vendidos! 🤯" : "¡Ofertas! ⏰"}
+                category={params[1] == 50 ? 53 : 50}
+            >
+                <Product
+                    slides={4}
+                />
+            </ProductList>
 
-            <CategoriesBox 
-            listTitle="Categorías"/>
+            <CategoriesBox
+                listTitle="Categorías" />
 
             <img src={sampleBanner} loading="lazy"></img>
         </div>
