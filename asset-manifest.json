@@ -1,34 +1,22 @@
 {
   "files": {
-    "main.css": "/eshopsample/static/css/main.662384fc.css",
-    "main.js": "/eshopsample/static/js/main.39e9bbed.js",
+    "main.css": "/eshopsample/static/css/main.f1314193.css",
+    "main.js": "/eshopsample/static/js/main.190c874b.js",
     "static/media/almacenamiento.png": "/eshopsample/static/media/almacenamiento.d1ceef0af71a9bb49409.png",
-    "static/media/roku express.png": "/eshopsample/static/media/roku express.fb3df9b15a1cea4bcf4c.png",
     "static/media/powersupplies.png": "/eshopsample/static/media/powersupplies.c71dcc08b5907f3dc138.png",
-    "static/media/fire7kidsblue.png": "/eshopsample/static/media/fire7kidsblue.caf9bfb2e2beb66fd145.png",
-    "static/media/firelite.png": "/eshopsample/static/media/firelite.7ca05b903820f78290dd.png",
     "static/media/procesadores.png": "/eshopsample/static/media/procesadores.ad8aa2a63214fabdc649.png",
-    "static/media/ramddr3.jpg": "/eshopsample/static/media/ramddr3.61b66ec66c0d47f620f9.jpg",
     "static/media/deal3.png": "/eshopsample/static/media/deal3.9bd33787a7a05ecd0451.png",
     "static/media/prueba.jpg": "/eshopsample/static/media/prueba.d9a6358aec56022d942e.jpg",
     "static/media/deal2.png": "/eshopsample/static/media/deal2.d51ff3ab3edb641dd38d.png",
-    "static/media/kingston240gb.png": "/eshopsample/static/media/kingston240gb.2b672bc7ae164b9a3017.png",
     "static/media/motherboards.png": "/eshopsample/static/media/motherboards.984b841f2151f27a90cb.png",
     "static/media/laptops.png": "/eshopsample/static/media/laptops.29b7b45fea043dd444f8.png",
-    "static/media/ramcorsairddr4.jpg": "/eshopsample/static/media/ramcorsairddr4.d22a05451e58c3043e1d.jpg",
     "static/media/fancooler.png": "/eshopsample/static/media/fancooler.c463d3d8240e5aa14b3e.png",
-    "static/media/xboxs.jpg": "/eshopsample/static/media/xboxs.44204a50718cbf99651c.jpg",
     "static/media/ssd.png": "/eshopsample/static/media/ssd.0ddad4571f0234df12c4.png",
-    "static/media/toshiba.jpg": "/eshopsample/static/media/toshiba.bac07924ac48f74e6a6c.jpg",
     "static/media/switcholed.jpg": "/eshopsample/static/media/switcholed.5a9002c64f07b0a4447c.jpg",
     "static/media/sampleBanner.jpg": "/eshopsample/static/media/sampleBanner.7a8d5bbc4e1ec0e96e7b.jpg",
     "static/media/RAM.webp": "/eshopsample/static/media/RAM.8d5657491ee3765c083b.webp",
-    "static/media/powersupply500w.png": "/eshopsample/static/media/powersupply500w.ed09153a764548f7ddb4.png",
     "static/media/razerdeathadder.jpg": "/eshopsample/static/media/razerdeathadder.58e5ccb896619cd37fbc.jpg",
-    "static/media/adata240gb.png": "/eshopsample/static/media/adata240gb.9407acaa3da9d54c44a1.png",
-    "static/media/firestick4k.jpg": "/eshopsample/static/media/firestick4k.0b90aaa1a0dd13b0195e.jpg",
     "static/media/streaming.png": "/eshopsample/static/media/streaming.267b5efccaeec50bbe5c.png",
-    "static/media/laptop.png": "/eshopsample/static/media/laptop.3d02b5e90930fc7d48cf.png",
     "static/media/deal1.jpg": "/eshopsample/static/media/deal1.993145318011f59bbe92.jpg",
     "static/media/maratecaSndLogo.png": "/eshopsample/static/media/maratecaSndLogo.0646a2cb0c413436e21a.png",
     "static/media/slick.svg": "/eshopsample/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -38,11 +26,11 @@
     "index.html": "/eshopsample/index.html",
     "static/media/beforeIco.svg": "/eshopsample/static/media/beforeIco.2cfc799d3c94afb75a91.svg",
     "static/media/nextIco.svg": "/eshopsample/static/media/nextIco.b647e29a9faaff887357.svg",
-    "main.662384fc.css.map": "/eshopsample/static/css/main.662384fc.css.map",
-    "main.39e9bbed.js.map": "/eshopsample/static/js/main.39e9bbed.js.map"
+    "main.f1314193.css.map": "/eshopsample/static/css/main.f1314193.css.map",
+    "main.190c874b.js.map": "/eshopsample/static/js/main.190c874b.js.map"
   },
   "entrypoints": [
-    "static/css/main.662384fc.css",
-    "static/js/main.39e9bbed.js"
+    "static/css/main.f1314193.css",
+    "static/js/main.190c874b.js"
   ]
 }
