@@ -36,7 +36,7 @@ export const Home = () => {
             <img src={deal3} loading="lazy"></img>
           </div>
 
-          <ProductList
+         <ProductList
             listTitle="¡Ofertas! ⏰"
             category={50}
           >

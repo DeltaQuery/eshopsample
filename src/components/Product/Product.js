@@ -4,14 +4,16 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick"
 import "../Product/Product.css"
-import { productArr } from '../../database/productArr'
 import { AddToCartButton } from '../AddToCartButton/AddToCartButton'
 import AppContext from "../../context/AppContext"
-import roundNumber from "../../hooks/roundNumber"
 import { useProducts } from "../../hooks/queries/useProducts"
+import { ProductName } from "./ProductName/ProductName"
+import { ProductImg } from "./ProductImg/ProductImg"
+import { ProductPrice } from "./ProductPrice/ProductPrice"
+import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton"
 
 export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, category, product }) => {
-    const { data, error, loading } = useProducts()
+    const { data, loading } = useProducts()
     const [products, setProducts] = React.useState()
     const { updateQuantity, removeFromCart } = React.useContext(AppContext)
 
@@ -27,14 +29,14 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
         if (!loading) {
             if (product) {
                 setProducts(product)
-            } else if(data) {
+            } else if (data) {
                 if (!category) {
                     setProducts(data.allProducts)
                 } else {
                     if (category === 50) {
-                    setProducts(data.allProducts.filter(x => x.discountedPrice))
+                        setProducts(data.allProducts.filter(x => x.discountedPrice))
                     } else {
-                      setProducts(data.allProducts.filter(x => x.category.some(e => e === category)))
+                        setProducts(data.allProducts.filter(x => x.category.some(e => e === category)))
                     }
                 }
             }
@@ -67,37 +69,44 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
     };
 
     return (
-        <>
-            {!cartFormat && <Slider {...settings}>
+        <>   
+            { (!cartFormat && loading) && <Slider {...settings}>
+                    <LoadingSkeleton></LoadingSkeleton>
+                    <LoadingSkeleton></LoadingSkeleton>
+                    <LoadingSkeleton></LoadingSkeleton>
+                    <LoadingSkeleton></LoadingSkeleton>
+                </Slider>
+            }
+                
+            {(!cartFormat && !loading) && <Slider {...settings}>
 
                 {products && products.map(product => {
                     return <article
                         className="productContainer"
                         key={product._id}>
 
-                        <div className="productImgContainer">
-                            <Link to={`/details/${product._id}`} className="productImgLink"><img className="productImg" src={product.images[0].smallImg} loading="lazy"></img></Link>
-                            <AddToCartButton
-                                buttonText=" + Carrito"
-                                buttonType="mobile"
-                                product={product}
-                            />
-                        </div>
+                        <ProductImg
+                            product={product}
+                            type="main"
+                        />
 
-                        <Link to={`/details/${product._id}`} className="productTitleContainer">
-                            {product.name}
-                        </Link>
+                        <ProductName
+                            _id={product._id}
+                            name={product.name}
+                            type="main"
+                        />
 
-                        <div className="productPriceContainer">
-                            {product.discountedPrice && <span className="productDiscountedPrice">${product.discountedPrice}</span>}
-                            <span className="productRegularPrice">${product.price}</span>
-                        </div>
+                        <ProductPrice
+                            price={product.price}
+                            discountedPrice={product.discountedPrice}
+                            quantity={product.quantity}
+                            type="main"
+                        />
 
                         <AddToCartButton
                             buttonText="Agregar al Carrito"
                             product={product}
                         />
-
                     </article>
                 })
                 }
@@ -109,15 +118,19 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
                 className="productContainer cartProductContainer"
                 key={cartProduct._id}>
 
-                <div className="productImgContainer cartImgContainer">
-                    <Link to={`/details/${cartProduct._id}`} className="productImgLink cartProductImgLink"><img className="productImg cartImg" src={cartProduct.images[0].smallImg} loading="lazy"></img></Link>
-                </div>
+                <ProductImg
+                    product={cartProduct}
+                    type="cart"
+                />
 
                 <div className="cartProductInfo">
                     <div className="cartProductTitle">
-                        <Link to={`/details/${cartProduct._id}`} className={`addedToCartProductTitle ${cartSidenav ? 'sidebarDisplayed' : ''}`}>
-                            {cartProduct.name}
-                        </Link>
+                        <ProductName
+                            _id={cartProduct._id}
+                            name={cartProduct.name}
+                            type="cart"
+                            cartSidenav={cartSidenav}
+                        />
 
                         {!cartSidenav && <div
                             className="removeProductIcon"
@@ -127,29 +140,12 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
 
                     </div>
 
-                    <div className="detailPriceContainer cartPriceContainer">
-                        {cartProduct.discountedPrice && (
-                            <div className="detailDiscountContainer cartDiscountContainer">
-                                {!cartSidenav ? <span className="detailDiscountedPrice cartDiscountedPrice">${roundNumber(cartProduct.discountedPrice * cartProduct.quantity)}</span> : <span className="detailDiscountedPrice cartDiscountedPrice">${roundNumber(cartProduct.discountedPrice)}</span>}
-
-                                {!cartSidenav ? <span className="detailDiscount cartDiscount">-{roundNumber(((100 / cartProduct.discountedPrice) * cartProduct.price) - 100)}%</span> : <span className="detailDiscount cartDiscount">-{roundNumber(((100 / cartProduct.discountedPrice) * cartProduct.price) - 100)}%</span>}
-                            </div>
-                        )}
-
-                        <div className="detailRegularContainer cartPriceContainer">
-                            {!cartSidenav ? <span
-                                className={
-                                    cartProduct.discountedPrice
-                                        ? "detailRegularPrice cartRegularPrice"
-                                        : "detailDiscountedPrice cartDiscountedPrice"
-                                }>${roundNumber(cartProduct.price * cartProduct.quantity)}</span> : <span
-                                    className={
-                                        cartProduct.discountedPrice
-                                            ? "detailRegularPrice cartRegularPrice"
-                                            : "detailDiscountedPrice cartDiscountedPrice"
-                                    }>${roundNumber(cartProduct.price)}</span>}
-                        </div>
-                    </div>
+                    <ProductPrice
+                        price={cartProduct.price}
+                        discountedPrice={cartProduct.discountedPrice}
+                        quantity={cartProduct.quantity}
+                        type="cart"
+                    />
 
                     {!cartSidenav && <div className="quantityContainer">
                         <button
@@ -163,8 +159,6 @@ export const Product = ({ slides = 4, cartFormat, cartSidenav, cartProduct, cate
                         >+</button>
                     </div>
                     }
-
-
                 </div>
             </article>
             }

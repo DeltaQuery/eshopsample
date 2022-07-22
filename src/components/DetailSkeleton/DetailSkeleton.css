@@ -1,0 +1,60 @@
+.detailSkeletonContainer {
+    padding-top: 20px;
+    padding-bottom: 2
+    0px;
+}
+
+.detailSkeleton {
+    background: #eee;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 30%, #ececec 33%);
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+    color: transparent;
+}
+
+.detailSkeleton--imgContainer {
+    margin: 0;
+    width: 100%;
+}
+
+.detailSkeleton--img {
+    width: 70%;
+    height: 240px;
+    margin: auto;
+}
+
+.detailSkeleton--price {
+    height: 60px;
+}
+
+.detailSkeleton--name {
+    height: 40px;
+}
+
+.detailSkeleton--functions {
+    height: 180px;
+}
+
+.detailSkeleton--button {
+    height: 40px;
+}
+
+@keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
+
+  @media (min-width: 600px) { 
+    .detailSkeleton--img {
+        width: 80%;
+        height: 250px;
+        margin: auto;
+    }
+
+    .detailSkeleton--functions {
+        height: 130px;
+    }
+
+}

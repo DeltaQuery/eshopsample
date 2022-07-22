@@ -14,6 +14,7 @@ import Slider from "react-slick"
 import "./Details.css"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { DetailSkeleton } from '../../components/DetailSkeleton/DetailSkeleton'
 
 
 export const Details = () => {
@@ -66,8 +67,8 @@ export const Details = () => {
 
                     for (let [key, value] of Object.entries(resultModelsValues)) {
                         let result = allProducts.data.allProducts.filter(x => x._id === value[1][1]._id)
-                        if(result){
-                          modelsArr.push(result[0])  
+                        if (result) {
+                            modelsArr.push(result[0])
                         }
                     }
                 }
@@ -88,7 +89,8 @@ export const Details = () => {
                 </a>
             </div>
 
-
+            { loading && <DetailSkeleton /> }
+            
             {productDetail && (
                 <article
                     className="productContainer detailContainer"
